@@ -32,3 +32,31 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## What is NextJS and Why
+
+- The React Framework for Production
+  - You still write React code, you still build React components and use React features (props, state, context, ...)
+  - NextJS just enhances your React apps and adds more features
+  - Lots of built-in featuers (e.g. routing) that help you solve common problems & clear guidance on how to use those features.
+  - There are certain problems which you will need to solve for almost all production-ready React apps: NextJS solves those for you.
+- A fullstack framework for ReactJS
+- NextJS solves common problems and makes building React apps easier!
+
+## NextJS key features
+
+- Server-side rendering
+
+  - Automatic page pre-rendering: Greate for SEO and initial load
+  - Blending client-side and server-side: Fetch data on the server and render finished pages
+
+- File based Routing
+
+  - Define pages and routes instead of code
+  - Less code, less work, highly understandable
+
+- Fullstack capabilities
+
+  - Easily add backend (server-side) code to your Next / React apps
+  - Storing data, getting data, authentication etc. Can be added to your React project.
+  - Don't have to build a standalone api project, but can be incorporated into the NextJS project.
