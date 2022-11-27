@@ -1,8 +1,10 @@
 // our-domain.com/
-import Layout from "../components/layout/Layout";
+import Head from "next/head";
+import { MongoClient } from "mongodb";
 import MeetupList from "../components/meetups/MeetupList";
+import { Fragment } from "react";
 
-const DUMMY_MEETUPS = [
+export const DUMMY_MEETUPS = [
   {
     id: "m1",
     title: "Munich Old Town",
@@ -16,19 +18,67 @@ const DUMMY_MEETUPS = [
     id: "m2",
     title: "Congress of Viena",
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/640px-Stadtbild_M%C3%BCnchen.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Montage_of_Vienna.jpg/772px-Montage_of_Vienna.jpg",
     address: "Wagramer Strasse 5, 1220 Vienna, Austria",
     description:
       "Congress of Vienna, assembly in 1814–15 that reorganized Europe after the Napoleonic Wars. It began in September 1814, five months after Napoleon I's first abdication and completed its “Final Act” in June 1815, shortly before the Waterloo campaign and the final defeat of Napoleon.",
   },
 ];
 
-function HomePage() {
+function HomePage({ meetups }) {
   return (
-    <Layout>
-      <MeetupList meetups={DUMMY_MEETUPS} />
-    </Layout>
+    <Fragment>
+      <Head>
+        <title>Next Meetups</title>
+        <meta
+          name="description"
+          content="Browse a huge list of highly active Next meetup"
+        />
+      </Head>
+      <MeetupList meetups={meetups} />
+    </Fragment>
   );
 }
+
+// Only works in /pages
+export async function getStaticProps() {
+  // fetch data from an API
+
+  // TODO: refactor needed!
+  const username = "someuser";
+  const password = "Zc7HzZapKVGpFAnv";
+  const client = await MongoClient.connect(
+    `mongodb+srv://${username}:${password}@cluster0.hdxwg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
+  );
+
+  const db = client.db();
+  const meetupsCollection = db.collection("meetups");
+  const meetups = await meetupsCollection.find().toArray();
+  console.log(meetups);
+  return {
+    props: {
+      meetups: [
+        ...DUMMY_MEETUPS,
+        ...meetups.map((meetup) => ({
+          title: meetup.title,
+          address: meetup.address,
+          image: meetup.image,
+          id: meetup._id.toString(),
+        })),
+      ],
+    },
+    // re-generate every 10 seconds after deployment.
+    revalidate: 10,
+  };
+}
+
+// export async function getServerSideProps({ req, res }) {
+//   // fetch data from an API
+//   //   return {
+//   //     props: {
+//   //       meetups: DUMMY_MEETUPS,
+//   //     },
+//   //   };
+// }
 
 export default HomePage;

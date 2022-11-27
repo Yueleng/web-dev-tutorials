@@ -60,3 +60,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
   - Easily add backend (server-side) code to your Next / React apps
   - Storing data, getting data, authentication etc. Can be added to your React project.
   - Don't have to build a standalone api project, but can be incorporated into the NextJS project.
+
+- Two forms of Pre-rendering
+
+  - Static Generation
+  - Server-side Rendering
+  - ![Pre Rendering](assets/pre-rendering.png)
