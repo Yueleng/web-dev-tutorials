@@ -66,3 +66,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
   - Static Generation
   - Server-side Rendering
   - ![Pre Rendering](assets/pre-rendering.png)
+
+- Shared Contents
+  - fallback: false / true / 'blocking'
+  - vercel deployment & automation pipeline
+  - optimizting images.
+  -

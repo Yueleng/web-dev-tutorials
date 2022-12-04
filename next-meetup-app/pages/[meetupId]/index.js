@@ -33,7 +33,7 @@ export async function getStaticPaths() {
   client.close();
 
   return {
-    // {fallback: true} is very useful,
+    // {fallback: true / 'blocking'} is very useful,
     // it not only pre-generates those pages during build time
     // but, it also tries to dynamic pre-rendering those pages with meetupId not included.
     fallback: false,
