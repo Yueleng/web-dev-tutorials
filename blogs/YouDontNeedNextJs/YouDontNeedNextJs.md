@@ -20,6 +20,8 @@ I should be honest as I received some criticism on Reddit after posting a link t
 
 ## Next.js — Bad Parts
 
+DX — Developer experience is one thing and AX — Architectural experience is another. Next is amazing with the former but poor with the latter. About software architecture there are age old golden principles that simply do not hold well with the Next ecosystem.
+
 ## About Aggressive Opinions
 
 Due to the SSR capabilities, the design choices of Next are extremely opinionated. It is all evident in the kind of structures that Next imposes for the application. Few examples are:
