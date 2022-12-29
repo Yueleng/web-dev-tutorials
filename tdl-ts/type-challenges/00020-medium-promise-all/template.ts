@@ -7,7 +7,7 @@
 // old answer, does not pass the last test cases
 // declare function PromiseAll<T extends readonly unknown[]>(
 //   args: readonly [...T]
-// ): Promise<{ [P in keyof T]: T[P] extends Promise<infer R> ? R : T[P] }>;
+// ): Promise<{ [P in keyof T]: T[P] extends Promise<infer R> ? R : T[P] }>; // ??
 
 type Resolved<E> = E extends Promise<infer R> ? R : E;
 
