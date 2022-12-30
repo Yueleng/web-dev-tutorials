@@ -174,7 +174,8 @@ const val: T = {
 
   // 可以赋值，子类型更佳具体，可以赋值给更佳宽泛的父类型
   a = b;
-  // 反过来不行
+  // 反过来不行.
+  // Why? Type Narrowing?
   b = a;
   ```
 
@@ -550,7 +551,7 @@ type Eg = Extract<"key1" | "key2", "key1">;
 /**
  * 利用Pick实现Omit
  */
-type Omit = Pick<T, Exclude<keyof T, K>>;
+type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 ```
 
 - 换种思路想一下，其实现可以是利用 `Pick` 提取我们需要的 `keys` 组成的类型
@@ -859,6 +860,39 @@ type AType = {
   key3: Function;
 };
 type Eg = FunctionKeys<AType>;
+
+// 原文实现不够完备, 看下面例子
+type BType = {
+  key1: never;
+  key2: () => void;
+  key3: undefined;
+  key4: null;
+  readonly key5: Function;
+};
+type Eg14 = FunctionKeys<BType>; // type Eg14 = "key1" | "key2" | "key3" | "key5"; why?
+
+/* _____________ More Discussion _____________ */
+type udf = NonUndefined<undefined>;
+type udf2 = udf extends Function ? 1 : 2; // type udf2 = 1; never extends Function is true ??
+
+// 工具类型 去除value 为 Never|never|null 的所有key
+type NonUndefinedNeverKey<T extends object> = TypeKeys<{
+  [K in keyof T]: T[K] extends undefined ? never : K;
+}>;
+
+type _BType = NonUndefinedNeverKey<BType> extends "key1" | "key2" ? 1 : 2; // 1
+
+type nullExtendsNever = null extends never ? 1 : 2; // 2
+type undefinedExtendsNever = undefined extends never ? 1 : 2; // 2
+type neverExtendsNever = never extends never ? 1 : 2; // 1
+type stringExtendsNever = string extends never ? 1 : 2; // 2
+
+type FunctionKeys2<T extends object> = TypeKeys<{
+  [K in NonUndefinedNeverKey<T>]: T[K] extends Function ? K : never;
+}>;
+
+type Eg15 = FunctionKeys2<AType>; // type Eg15 = "key2" | "key3"
+type Eg16 = FunctionKeys2<BType>; // type Eg16 = "key2" | "key5"
 ```
 
 - 首先约束参数 `T` 类型为 `object`
@@ -1013,7 +1047,7 @@ type IfEquals<X, Y, A = X, B = never> =
 
   是不是很奇怪，为什么能推导出 `A` 和 `B` 类型是不一样的？告诉你答案：
 
-  - 这是利用了 `Ts` 编译器的一个特点，就是 `Ts` 编译器会认为如果两个类型（比如这里的 X 和 Y）仅被用于约束两个相同的泛型函数则是相同的。这理解起来有些不可思议，或者说在逻辑上这种逻辑并不对（因为可以举出反例），但是 Ts 开发团队保证了这一特性今后不会变。可参考这里。
+  - 这是利用了 `Ts` 编译器的一个特点，就是 `Ts` 编译器会认为如果两个类型（比如这里的 X 和 Y）仅被用于约束两个相同的泛型函数则是相同的。这理解起来有些不可思议，或者说在逻辑上这种逻辑并不对（因为可以举出反例），但是 Ts 开发团队保证了这一特性今后不会变。可[参考这里](https://stackoverflow.com/questions/52443276/how-to-exclude-getter-only-properties-from-type-in-typescript)。
   - 注意，这里也会判断的属性修饰符，例如 `readonly`, `可选属性` 等，看通过下面的例子验证：
 
   ```ts
