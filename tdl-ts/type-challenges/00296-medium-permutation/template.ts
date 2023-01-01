@@ -12,7 +12,7 @@ type Permutation<T, P = T> = [T] extends [never]
     : never;
 
 // never extends anything
-type neverExtendsAny = never extends any ? 1 : 2;
+type neverExtendsAny = never extends any ? 1 : 2; // 1
 
 // nothing extends never
 type anyExtendsNever = [any] extends [never] ? 1 : 2;

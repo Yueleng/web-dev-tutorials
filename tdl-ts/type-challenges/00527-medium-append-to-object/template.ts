@@ -1,3 +1,4 @@
+import type { Equal, Expect } from "@type-challenges/utils";
 type AppendToObject1<
   T extends object,
   K extends string | number | symbol,
@@ -23,7 +24,7 @@ type _test1 = AppendToObject1<test1, "home", boolean>; // why not equal ??
 
 // 本题难点：需要merge 重新遍历 object
 // 辅助type Merge
-type Merge<T extends object> = {
+export type _Merge<T extends object> = {
   [P in keyof T]: T[P];
 };
 
@@ -31,8 +32,19 @@ type AppendToObject<
   T extends object,
   K extends string | number | symbol,
   V
-> = Merge<
+> = _Merge<
   T & {
     [P in K]: V;
   }
 >;
+
+type A = {
+  name: string;
+  age: number;
+};
+type B = {
+  name: string;
+};
+
+type IsEqual1 = Equal<A, B & { age: number }>; //false
+type IsEqual2 = Equal<A, _Merge<B & { age: number }>>; // true
