@@ -31,3 +31,10 @@ type IsUnion<T> = (T extends any ? (arg: T) => void : never) extends (
     ? false
     : true
   : never;
+
+// 这是一个错误答案
+type IsUnion3<T, U = T> = T extends U
+  ? [U] extends [T]
+    ? false
+    : true
+  : never;

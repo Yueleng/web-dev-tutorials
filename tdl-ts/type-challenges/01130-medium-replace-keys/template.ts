@@ -1,5 +1,10 @@
+// prettier-ignore
 type ReplaceKeys<U, T, Y> = {
-  [K in keyof U]: K extends T ? (K extends keyof Y ? Y[K] : never) : U[K];
+  [K in keyof U]: K extends T 
+                    ? K extends keyof Y 
+                      ? Y[K] // K both in T and Y, replace with new value: Y[K]
+                      : never  // K in T but not in Y, give the key never value
+                    : U[K]; // K not in U, return the same: U[K]
 };
 
 // type NodeA = {
