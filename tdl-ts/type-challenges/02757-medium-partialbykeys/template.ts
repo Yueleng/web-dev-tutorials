@@ -8,7 +8,7 @@ type PartialByKeys<T extends object, K extends keyof T = keyof T> = _Merge<
   }
 >;
 
-// du123
+// du123, not fully correct
 // Exclude<keyof T, K> lose the state for readOnly...
 // while Omit<T, K> keeps the state of the remaining keys
 type PartialByKeys2<T extends object, K extends keyof T = keyof T> = _Merge<
