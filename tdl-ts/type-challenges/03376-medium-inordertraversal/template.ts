@@ -33,7 +33,7 @@ type InorderTraversal2<T extends TreeNode | null> = T extends TreeNode
   : [];
 
 // a better solution
-type InorderTraversal<T extends TreeNode | null> = [T] extends [TreeNode]
+type InorderTraversal<T extends TreeNode | null> = [T] extends [TreeNode] // this is vital
   ? [...InorderTraversal<T["left"]>, T["val"], ...InorderTraversal<T["right"]>]
   : [];
 
