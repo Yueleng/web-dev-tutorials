@@ -34,3 +34,19 @@ type GreaterThan<T extends number, U extends number> = ArrLenCompare<
   : ArrLenCompare<DigitsToArr<`${T}`>, DigitsToArr<`${U}`>> extends 1
   ? true
   : false;
+
+// another solution, but does not support number greater than 1000
+type List<N extends number, R extends any[] = []> = R["length"] extends N
+  ? R
+  : List<N, [...R, any]>;
+type _GreaterThan<A1 extends any[] | [], A2 extends any[] | []> = A1 extends A2
+  ? false
+  : A1 extends []
+  ? false
+  : A2 extends []
+  ? true
+  : _GreaterThan<Pop<A1>, Pop<A2>>;
+type GreaterThan1<T extends number, U extends number> = _GreaterThan<
+  List<T>,
+  List<U>
+>;
