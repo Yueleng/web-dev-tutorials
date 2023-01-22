@@ -24,6 +24,17 @@ type _Without<T extends any[], U extends any[]> = T extends [
     : [F, ..._Without<R, U>]
   : [];
 
-type Without<T extends any[], U extends any | any[]> = U extends any[]
+type Without1<T extends any[], U extends any | any[]> = U extends any[]
   ? _Without<T, U>
   : _Without<T, [U]>;
+
+// answers from github
+// 妙哉
+type Without<T extends unknown[], U, R extends unknown[] = []> = T extends [
+  infer F,
+  ...infer Rest
+]
+  ? F extends (U extends unknown[] ? U[number] : U)
+    ? Without<Rest, U, R> // get rid of this F, since it is in U
+    : Without<Rest, U, [...R, F]>
+  : R;
