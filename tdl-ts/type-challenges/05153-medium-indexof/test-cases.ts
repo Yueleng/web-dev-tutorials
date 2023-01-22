@@ -10,7 +10,7 @@ type cases = [
   Expect<Equal<IndexOf<[any, 1], 1>, 1>>
 ];
 
-type cases = [
+type cases1 = [
   Expect<Equal<IndexOf1<[1, 2, 3], 2>, 1>>,
   Expect<Equal<IndexOf1<[2, 6, 3, 8, 4, 1, 7, 3, 9], 3>, 2>>,
   Expect<Equal<IndexOf1<[0, 0, 0], 2>, -1>>,
