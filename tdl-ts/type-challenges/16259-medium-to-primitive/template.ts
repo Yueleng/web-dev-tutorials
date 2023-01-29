@@ -50,6 +50,7 @@ type PersonInfoToPrimitive = ToPrimitive<{
   hobbies: ["sing", "dance"];
 }>;
 
+// 妙哉的解答
 type ToPrimitive1<T> = T extends object
   ? {
       [K in keyof T]: ToPrimitive1<T[K]>;
