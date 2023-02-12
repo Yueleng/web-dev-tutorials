@@ -1,0 +1,43 @@
+# CSS3 Features
+
+## Flex Box
+
+- display
+  - flex
+  - -webkit-flex
+  - display attribute is used for flex-container
+- direction
+  - rtl; determines the rendering direction (left to right is by default)
+- flex-direction
+  - row | row-reverse | column | column-reverse
+- justify-content
+  - flex-start | flex-end | center | space-between | space-around
+- align-items
+  - stretch | center | start | end
+- flex-wrap
+  - nowrap | wrap | wrap-reverse
+- align-content
+  - flex-start | flex-end | center | space-between | space-around | stretch
+- order
+  - -1 | 1 | 2 |...
+- all left space on the right for a certain flex item
+  - .flex-container
+    - display:flex
+  - .flex-item:nth-child(#number)
+    - margin-right: auto
+- perfectly centered
+  - .flex-container
+    - display: flex
+  - .flex-item
+    - margin: auto
+- align-self
+  - auto: 如果'align-self'的值为'auto'，则其计算值为元素的父元素的'align-items'值，如果其没有父元素，则计算值为'stretch'。
+  - flex-start | flex-end | center | baseline | stretch
+- flex
+  - flex: auto meaning flex: 1 1 auto
+  - flex: initial meaning flex: 0 1 auto
+  - flex: none: meaning flex: 0 0 auto
+  - flex: inherit
+  - syntax: flex-grow flex-shrink flex-basis
+- good example
+  - https://www.runoob.com/try/try.php?filename=trycss3_flexbox_website
