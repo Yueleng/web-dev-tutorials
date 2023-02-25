@@ -14,17 +14,25 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
     "@types/node": "^18.14.1",
     "nodemon": "^2.0.20",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.5"
   },
   "dependencies": {
+    "@apollo/server": "^4.4.0",
     "@mikro-orm/cli": "^5.6.11",
     "@mikro-orm/core": "^5.6.11",
     "@mikro-orm/migrations": "^5.6.11",
     "@mikro-orm/postgresql": "^5.6.11",
-    "pg": "^8.9.0"
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "graphql": "15.8.0",
+    "pg": "^8.9.0",
+    "type-graphql": "^1.1.1"
   },
   "mikro-orm": {
     "useTsNode": true,
