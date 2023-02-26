@@ -30,9 +30,9 @@
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "graphql": "15.8.0",
+    "graphql": "^16.6.0",
     "pg": "^8.9.0",
-    "type-graphql": "^1.1.1"
+    "type-graphql": "2.0.0-beta.1"
   },
   "mikro-orm": {
     "useTsNode": true,

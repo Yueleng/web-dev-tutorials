@@ -5,19 +5,21 @@ import { buildSchema } from "type-graphql";
 import { expressMiddleware } from "@apollo/server/express4";
 import cors from "cors";
 import { json } from "body-parser";
-import { HelloResolver } from "./resolvers/hello";
+import { PostResolver } from "./resolvers/post";
 import { __prod__ } from "./constants";
 import mikroOrmConfig from "./mikro-orm.config";
+// import { ORMContext } from "./types";
 
 const main = async () => {
   const orm = await MikroORM.init(mikroOrmConfig);
   await orm.getMigrator().up();
+  const emFork = orm.em.fork(); // <-- create the fork
 
   const app = express();
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [HelloResolver],
+      resolvers: [PostResolver],
       validate: false,
     }),
   });
@@ -28,7 +30,9 @@ const main = async () => {
     "/graphql",
     cors<cors.CorsRequest>(),
     json(),
-    expressMiddleware(apolloServer)
+    expressMiddleware(apolloServer, {
+      context: async () => ({ em: emFork }),
+    })
   );
 
   app.get("/", (_, res) => {
