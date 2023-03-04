@@ -8,6 +8,7 @@ import { json } from "body-parser";
 import { PostResolver } from "./resolvers/post";
 import { __prod__ } from "./constants";
 import mikroOrmConfig from "./mikro-orm.config";
+import { UserResolver } from "./resolvers/user";
 // import { ORMContext } from "./types";
 
 const main = async () => {
@@ -19,7 +20,7 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [PostResolver],
+      resolvers: [PostResolver, UserResolver],
       validate: false,
     }),
   });
