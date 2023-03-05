@@ -10,6 +10,7 @@ import {
   InputType,
   Field,
   ObjectType,
+  Query,
 } from "type-graphql";
 import argon2 from "argon2";
 
@@ -43,10 +44,21 @@ class UserResponse {
 
 @Resolver()
 export class UserResolver {
+  @Query(() => User, { nullable: true })
+  async me(@Ctx() { req, em }: ORMContext) {
+    // not logged in
+    if (!req.session.userId) {
+      return null;
+    }
+
+    const user = await em.findOne(User, { id: req.session.userId });
+    return user;
+  }
+
   @Mutation(() => UserResponse)
   async register(
     @Arg("options") options: UsernamePasswordInput,
-    @Ctx() { em }: ORMContext
+    @Ctx() { em, req }: ORMContext
   ): Promise<UserResponse> {
     const { username, password } = options;
 
@@ -90,13 +102,16 @@ export class UserResolver {
       }
     }
 
+    // store user id
+    req.session.userId = user.id;
+
     return { user };
   }
 
   @Mutation(() => UserResponse)
   async login(
     @Arg("options") options: UsernamePasswordInput,
-    @Ctx() { em }: ORMContext
+    @Ctx() { em, req }: ORMContext
   ): Promise<UserResponse> {
     const user = await em.findOne(User, { username: options.username });
     if (!user) {
@@ -115,6 +130,8 @@ export class UserResolver {
         errors: [{ field: "password", message: "incorrect password" }],
       };
     }
+
+    req.session.userId = user.id;
 
     return { user };
   }
