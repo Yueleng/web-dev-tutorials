@@ -14,4 +14,19 @@ public class SayHelloController {
         return "Hello! What are you learning today?";
     }
 
+    @RequestMapping("say-hello-html")
+    @ResponseBody
+    public String sayHelloHtml() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<html>");
+        sb.append("<head>");
+        sb.append("<title> My first HTML Page </title>");
+        sb.append("</head>");
+        sb.append("<body>");
+        sb.append("My first html page with body");
+        sb.append("</body>");
+        sb.append("</html>");
+        return sb.toString();
+    }
+
 }
