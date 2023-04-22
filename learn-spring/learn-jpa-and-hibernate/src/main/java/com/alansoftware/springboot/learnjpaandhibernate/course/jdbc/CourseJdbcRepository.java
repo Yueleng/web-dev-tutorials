@@ -8,26 +8,23 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class CourseJdbcRepository {
-
     @Autowired
     private JdbcTemplate springJdbcRepository;
-
     private final static String INSERT_QUERY =
             """
-            insert into course (id, name, author)
-            values (?, ?, ?);
-            """;
-
+                    insert into course (id, name, author)
+                    values (?, ?, ?);
+                    """;
     private final static String DELETE_QUERY =
-           """
-           delete from course
-           where id = ?;
-            """;
+            """
+                    delete from course
+                    where id = ?;
+                     """;
 
     private final static String SELECT_QUERY =
             """
-            select * from course where id = ?
-            """;
+                    select * from course where id = ?
+                    """;
 
     public void insert(Course course) {
         springJdbcRepository.update(INSERT_QUERY,
@@ -41,7 +38,8 @@ public class CourseJdbcRepository {
         springJdbcRepository.update(DELETE_QUERY, id);
     }
 
-    public Course selectById(long id) {
+    public Course findById(long id) {
+        // ResultSet -> Bean [Row Mapper]
         return springJdbcRepository.queryForObject(SELECT_QUERY, new BeanPropertyRowMapper<>(Course.class), id);
     }
 }
