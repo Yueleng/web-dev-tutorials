@@ -4,7 +4,7 @@
 </head>
 <body>
 <div>Welcome to Alan Wang Software</div>
-<div>Your Name: ${name}</div>
-<div><a href="list-todos">Manage</a> your todos</div>
+<div>${name}</div>
+<div>Your Todos are ${todos}</div>
 </body>
 </html>
