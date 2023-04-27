@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @Controller
 @SessionAttributes("name")
 public class LoginController {
-    private AuthenticationService authenticationService;
+    private final AuthenticationService authenticationService;
 
     public LoginController(AuthenticationService authenticationService) {
         super();
@@ -37,8 +37,8 @@ public class LoginController {
 
             model.put("name", name);
             //Authentication
-            //name - in28minutes
-            //password - dummy
+            //name - alanwang
+            //password - pwcwelcome
 
             return "welcome";
         }
