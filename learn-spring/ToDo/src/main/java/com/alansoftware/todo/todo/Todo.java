@@ -1,13 +1,25 @@
 package com.alansoftware.todo.todo;
 
-import jakarta.validation.constraints.Size;
-
 import java.time.LocalDate;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.Size;
 
 //Database (MySQL)
 //Static List of todos => Database (H2, MySQL)
 
+//JPA
+// Bean -> Database Table
+
+@Entity
 public class Todo {
+
+    public Todo() {
+
+    }
 
     public Todo(int id, String username, String description, LocalDate targetDate, boolean done) {
         super();
@@ -18,8 +30,13 @@ public class Todo {
         this.done = done;
     }
 
+    @Id
+    @GeneratedValue
     private int id;
+
+    @Column(name = "name")
     private String username;
+
     @Size(min = 10, message = "Enter at least 10 characters")
     private String description;
     private LocalDate targetDate;
