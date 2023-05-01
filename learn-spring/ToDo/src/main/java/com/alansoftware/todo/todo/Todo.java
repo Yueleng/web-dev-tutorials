@@ -34,7 +34,7 @@ public class Todo {
     @GeneratedValue
     private int id;
 
-    @Column(name = "name")
+    //    @Column(name = "name")
     private String username;
 
     @Size(min = 10, message = "Enter at least 10 characters")
