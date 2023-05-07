@@ -80,6 +80,25 @@ public class UserJpaResource {
         return user.get().getPosts();
     }
 
+    // get /users/{id}/posts
+    @GetMapping(path = "/jpa/users/{id}/posts/{postId}")
+    public Post retrievePostForUserByPostId(@PathVariable int id, @PathVariable int postId) {
+        Optional<User> user = userRepository.findById(id);
+
+        if (user.isEmpty())
+            throw new UserNotFoundException("id: " + id);
+
+        Optional<Post> post = postRepository.findById(postId);
+
+        if (post.isEmpty())
+            throw new UserNotFoundException("post: " + postId);
+
+        if (post.get().getUser().getId() != id)
+            throw new UserNotFoundException("this user id: " + id + ", does not have postId: " + postId);
+
+        return post.get();
+    }
+
     // post /users/{id}/posts
     @PostMapping(path = "/jpa/users/{id}/posts")
     public ResponseEntity<Object> createPostsForUser(@PathVariable int id, @Valid @RequestBody Post post) {
@@ -96,7 +115,7 @@ public class UserJpaResource {
                 .path("/{id}")
                 .buildAndExpand(savedPost.getId())
                 .toUri();
-        
+
         return ResponseEntity.created(location).build();
     }
 }
