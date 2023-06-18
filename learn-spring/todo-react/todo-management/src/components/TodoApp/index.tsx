@@ -7,7 +7,7 @@ const TodoApp: FC = () => {
     <div className="todo">
       Todo Management Application
       <Login />
-      <Welcome />
+      {/* <Welcome /> */}
     </div>
   );
 };
