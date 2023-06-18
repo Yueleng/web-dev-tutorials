@@ -1,11 +1,32 @@
-import { FC, useState } from "react";
+import { FC, useState, useCallback } from "react";
 import "./index.css";
 
 const Login: FC = () => {
   const [username, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
+
+  const handleSubmit = useCallback(() => {
+    if (username === "alanwang" && password === "dummy") {
+      setShowSuccessMessage(true);
+      setShowErrorMessage(false);
+    } else {
+      setShowSuccessMessage(false);
+      setShowErrorMessage(true);
+    }
+  }, [password, username]);
+
   return (
     <div className="login">
+      {showSuccessMessage && (
+        <div className="successMessage">Authenticated Successfully</div>
+      )}
+      {showErrorMessage && (
+        <div className="errorMessage">
+          Authentication Failed. Please check your credentials.
+        </div>
+      )}
       <div className="login-form">
         <div>
           <label htmlFor="username">User Name</label>
@@ -28,7 +49,7 @@ const Login: FC = () => {
           />
         </div>
         <div>
-          <button type="button" name="login">
+          <button type="button" name="login" onClick={handleSubmit}>
             Login
           </button>
         </div>
