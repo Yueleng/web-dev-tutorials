@@ -1,7 +1,8 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import Counter from "./components/counter/Counter";
+// import reactLogo from "./assets/react.svg";
+// import viteLogo from "/vite.svg";
+import Counter from "./components/Counter/Counter";
+import Todo from "./components/TodoApp";
 import "./App.css";
 
 function App() {
@@ -9,7 +10,8 @@ function App() {
 
   return (
     <div className="App">
-      <Counter />
+      {/* <Counter /> */}
+      <Todo />
       {/* <>
         {" "}
         <div>
