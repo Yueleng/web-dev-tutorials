@@ -1,6 +1,6 @@
 import { FC, useState, useCallback } from "react";
-import "./index.css";
 import { useNavigate } from "react-router-dom";
+import "./index.css";
 
 const Login: FC = () => {
   const [username, setUserName] = useState<string>("");
