@@ -1,21 +1,24 @@
 import { FC, useState, useCallback } from "react";
 import "./index.css";
+import { useNavigate } from "react-router-dom";
 
 const Login: FC = () => {
   const [username, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = useCallback(() => {
     if (username === "alanwang" && password === "dummy") {
       setShowSuccessMessage(true);
       setShowErrorMessage(false);
+      navigate("/welcome");
     } else {
       setShowSuccessMessage(false);
       setShowErrorMessage(true);
     }
-  }, [password, username]);
+  }, [password, username, navigate]);
 
   return (
     <div className="login">
