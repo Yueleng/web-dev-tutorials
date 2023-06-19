@@ -1,7 +1,9 @@
 import { FC } from "react";
+import { useParams } from "react-router-dom";
 
 const Welcome: FC = () => {
-  return <div className="welcome">Welcome Component</div>;
+  const { username } = useParams();
+  return <div className="welcome">Welcome in: {username}</div>;
 };
 
 export default Welcome;

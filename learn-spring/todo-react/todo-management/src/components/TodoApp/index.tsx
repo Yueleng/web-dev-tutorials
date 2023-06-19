@@ -12,7 +12,7 @@ const TodoApp: FC = () => {
         <Routes>
           <Route path="/" element={<Login />}></Route>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/welcome" element={<Welcome />}></Route>
+          <Route path="/welcome/:username" element={<Welcome />}></Route>
           <Route path="*" element={<Error />}></Route>
         </Routes>
       </BrowserRouter>

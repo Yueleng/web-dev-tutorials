@@ -13,7 +13,7 @@ const Login: FC = () => {
     if (username === "alanwang" && password === "dummy") {
       setShowSuccessMessage(true);
       setShowErrorMessage(false);
-      navigate("/welcome");
+      navigate(`/welcome/${username}`);
     } else {
       setShowSuccessMessage(false);
       setShowErrorMessage(true);
