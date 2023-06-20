@@ -2,6 +2,7 @@ import { FC } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "../Login";
 import Welcome from "../Welcome";
+import Todos from "../Todos";
 import Error from "../Error";
 
 const TodoApp: FC = () => {
@@ -13,6 +14,7 @@ const TodoApp: FC = () => {
           <Route path="/" element={<Login />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/welcome/:username" element={<Welcome />}></Route>
+          <Route path="/todos" element={<Todos />}></Route>
           <Route path="*" element={<Error />}></Route>
         </Routes>
       </BrowserRouter>
