@@ -1,12 +1,21 @@
 import { FC, useMemo } from "react";
-import { useParams } from "react-router-dom";
 
 const Todos: FC = () => {
-  const todos = [
-    { id: 1, description: "Learn AWS" },
-    { id: 1, description: "Learn Fullstack Dev" },
-    { id: 1, description: "Learn DevOps" },
-  ];
+  const today = useMemo(() => new Date(), []);
+
+  const targetDate = useMemo(
+    () => new Date(today.getFullYear(), today.getMonth(), today.getDay()),
+    [today]
+  );
+
+  const todos = useMemo(
+    () => [
+      { id: 1, description: "Learn AWS", done: false, targetDate },
+      { id: 1, description: "Learn Fullstack Dev", done: false, targetDate },
+      { id: 1, description: "Learn DevOps", done: false, targetDate },
+    ],
+    [targetDate]
+  );
 
   return (
     <div className="list-todo">
@@ -17,6 +26,8 @@ const Todos: FC = () => {
             <tr>
               <td>id</td>
               <td>description</td>
+              <td>isDone</td>
+              <td>Target Date</td>
             </tr>
           </thead>
           <tbody>
@@ -24,6 +35,8 @@ const Todos: FC = () => {
               <tr key={todo.id}>
                 <td>{todo.id}</td>
                 <td>{todo.description}</td>
+                <td>{`${todo.done}`}</td>
+                <td>{todo.targetDate.toDateString()}</td>
               </tr>
             ))}
           </tbody>
