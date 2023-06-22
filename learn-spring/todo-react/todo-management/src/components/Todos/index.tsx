@@ -18,10 +18,10 @@ const Todos: FC = () => {
   );
 
   return (
-    <div className="list-todo">
+    <div className="container list-todo">
       <h1>Things You Want To Do!</h1>
       <div>
-        <table>
+        <table className="table">
           <thead>
             <tr>
               <td>id</td>
