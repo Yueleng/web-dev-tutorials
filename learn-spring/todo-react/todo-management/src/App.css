@@ -1,4 +1,4 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -39,4 +39,17 @@
 
 .read-the-docs {
   color: #888;
+}
+*/
+
+.App {
+  text-align: center;
+  font-size: 20px;
+}
+
+.footer {
+  bottom: 0;
+  position: absolute;
+  width: 90%;
+  height: 40px;
 }

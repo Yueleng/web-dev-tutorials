@@ -11,8 +11,8 @@ const Todos: FC = () => {
   const todos = useMemo(
     () => [
       { id: 1, description: "Learn AWS", done: false, targetDate },
-      { id: 1, description: "Learn Fullstack Dev", done: false, targetDate },
-      { id: 1, description: "Learn DevOps", done: false, targetDate },
+      { id: 2, description: "Learn Fullstack Dev", done: false, targetDate },
+      { id: 3, description: "Learn DevOps", done: false, targetDate },
     ],
     [targetDate]
   );

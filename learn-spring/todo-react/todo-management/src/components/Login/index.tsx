@@ -1,30 +1,26 @@
 import { FC, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 import "./index.css";
 
 const Login: FC = () => {
+  const { login } = useAuth();
   const [username, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = useCallback(() => {
-    if (username === "alanwang" && password === "dummy") {
-      setShowSuccessMessage(true);
-      setShowErrorMessage(false);
+  const handleSubmit = useCallback(async () => {
+    const result = await login(username, password);
+    if (result) {
       navigate(`/welcome/${username}`);
     } else {
-      setShowSuccessMessage(false);
       setShowErrorMessage(true);
     }
-  }, [password, username, navigate]);
+  }, [username, password, login, navigate]);
 
   return (
     <div className="login">
-      {showSuccessMessage && (
-        <div className="successMessage">Authenticated Successfully</div>
-      )}
       {showErrorMessage && (
         <div className="errorMessage">
           Authentication Failed. Please check your credentials.

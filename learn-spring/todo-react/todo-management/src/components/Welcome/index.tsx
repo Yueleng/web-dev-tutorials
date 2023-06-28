@@ -5,7 +5,7 @@ const Welcome: FC = () => {
   const { username } = useParams();
   return (
     <div className="welcome">
-      Welcome in: {username}
+      <h1>Welcome: {username}</h1>
       <div>
         Mange your todos - <Link to="/todos">Go here</Link>
       </div>
