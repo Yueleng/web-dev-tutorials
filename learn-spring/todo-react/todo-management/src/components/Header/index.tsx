@@ -15,22 +15,26 @@ const Header: FC = () => {
             >
               in28minutes
             </a>
-            {isAuthenticated && (
-              <div className="collapse navbar-collapse">
-                <ul className="navbar-nav">
-                  <li className="nav-item fs-5">
+
+            <div className="collapse navbar-collapse">
+              <ul className="navbar-nav">
+                <li className="nav-item fs-5">
+                  {isAuthenticated && (
                     <Link className="nav-link" to="/welcome/alanwang">
                       Home
                     </Link>
-                  </li>
+                  )}
+                </li>
+                {isAuthenticated && (
                   <li className="nav-item fs-5">
                     <Link className="nav-link" to="/todos">
                       Todos
                     </Link>
                   </li>
-                </ul>
-              </div>
-            )}
+                )}
+              </ul>
+            </div>
+
             <ul className="navbar-nav">
               {!isAuthenticated && (
                 <li className="nav-item fs-5">
@@ -41,7 +45,7 @@ const Header: FC = () => {
               )}
               {isAuthenticated && (
                 <li className="nav-item fs-5">
-                  <Link className="nav-link" to="/logout">
+                  <Link className="nav-link" to="/logout" onClick={logout}>
                     Logout
                   </Link>
                 </li>
