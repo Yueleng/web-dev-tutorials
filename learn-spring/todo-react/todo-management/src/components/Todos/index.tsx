@@ -1,4 +1,5 @@
-import { FC, useCallback, useEffect, useMemo, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   retrieveAllTodosForUsernameApi,
   deleteTodoApi,
@@ -23,10 +24,11 @@ const Todos: FC = () => {
   // );
 
   const authCtx = useAuth();
+  const navigate = useNavigate();
 
   const [todos, setTodos] = useState<
     {
-      id: number;
+      id: string;
       description: string;
       done: boolean;
       targetDate: Date;
@@ -61,6 +63,10 @@ const Todos: FC = () => {
       .catch((error) => console.log(error));
   };
 
+  const updateTodo = (id: string) => {
+    navigate(`/todo/${id}`);
+  };
+
   return (
     <div className="container list-todo">
       <h1>Things You Want To Do!</h1>
@@ -69,10 +75,12 @@ const Todos: FC = () => {
         <table className="table">
           <thead>
             <tr>
-              <td>id</td>
-              <td>description</td>
-              <td>isDone</td>
-              <td>Target Date</td>
+              <th>id</th>
+              <th>description</th>
+              <th>isDone</th>
+              <th>Target Date</th>
+              <th>Update</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -83,12 +91,18 @@ const Todos: FC = () => {
                 <td>{`${todo.done}`}</td>
                 <td>{todo.targetDate.toDateString()}</td>
                 <td>
+                  <button
+                    className="btn btn-success"
+                    onClick={() => updateTodo(todo.id)}
+                  >
+                    Update
+                  </button>
+                </td>
+                <td>
                   {" "}
                   <button
                     className="btn btn-warning"
-                    onClick={() =>
-                      deleteTodo(authCtx.username, String(todo.id))
-                    }
+                    onClick={() => deleteTodo(authCtx.username, todo.id)}
                   >
                     Delete
                   </button>{" "}

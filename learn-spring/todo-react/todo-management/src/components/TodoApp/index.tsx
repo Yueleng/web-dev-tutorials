@@ -36,6 +36,14 @@ const TodoApp: FC = () => {
                 </AuthenticatedRoute>
               }
             ></Route>
+            <Route
+              path="/todo/:id"
+              element={
+                <AuthenticatedRoute>
+                  <Todo />
+                </AuthenticatedRoute>
+              }
+            ></Route>
             <Route path="/logout" element={<Logout />}></Route>
             <Route path="*" element={<Error />}></Route>
           </Routes>
