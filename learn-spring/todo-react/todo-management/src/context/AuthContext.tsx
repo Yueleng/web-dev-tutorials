@@ -5,13 +5,13 @@ import { executeBasicAuthenticationService } from "../api/HelloWorldApiService";
 // 1. Create a Context
 export const AuthContext = createContext<{
   isAuthenticated: boolean;
-  username: string | null;
+  username: string;
   login: (_username: string, _password: string) => Promise<boolean>;
   logout: () => void;
   token: string | null;
 }>({
   isAuthenticated: false,
-  username: null,
+  username: "",
   // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
   login: (_username: string, _password: string) => {
     return Promise.resolve(false);
@@ -26,7 +26,7 @@ export const AuthContext = createContext<{
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   // 3. Put some state in the context
   const [isAuthenticated, setAuthenticated] = useState(false);
-  const [username, setUsername] = useState<string | null>(null);
+  const [username, setUsername] = useState<string>("");
   const [token, setToken] = useState<string | null>(null);
 
   async function login(username: string, password: string) {
@@ -61,7 +61,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   function logout() {
     setAuthenticated(false);
     setToken(null);
-    setUsername(null);
+    setUsername("");
   }
 
   return (
